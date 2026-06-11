@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon – Ahmad Aripin</title>
+    <title>Coming Soon – Ahmad Aripin</title>
+
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --bg-start: #0f0c29;   /* dark violet */
@@ -34,28 +36,26 @@
             padding: 2.5rem 2rem;
             max-width: 460px;
             width: 100%;
-            animation: fadeIn 0.8s ease-out;
+            animation: fadeIn .8s ease-out;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
         h1 {
             font-size: 2.2rem;
             font-weight: 800;
-            margin-bottom: 0.6rem;
             color: var(--accent);
         }
         p {
             font-size: 1rem;
             line-height: 1.5;
-            margin-bottom: 1.5rem;
             color: var(--text);
         }
         .timer {
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
         }
-        .timer div {
-            flex: 1;
-        }
+        .timer div {flex:1;}
         .timer span {
             display: block;
             font-size: 2rem;
@@ -64,30 +64,31 @@
         }
         .timer small {
             display: block;
-            font-size: 0.75rem;
+            font-size: .75rem;
             color: var(--text);
         }
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
+        .btn-back {
+            align-self: flex-start;               /* kiri */
+            display: inline-flex;
+            align-items: center;
+            padding: .6rem 1rem;                  /* lebih kecil */
             background: var(--accent);
             color: #fff;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: .9rem;                     /* teks kecil */
+            transition: transform .2s, box-shadow .2s;
         }
-        .btn:hover {
+        .btn-back:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(236,72,153,0.3);
+            box-shadow: 0 8px 20px rgba(236,72,153,.3);
         }
-        @keyframes fadeIn {
-            from {opacity:0; transform:translateY(20px);} 
-            to {opacity:1; transform:none;}
-        }
-        @media (max-width:480px) {
-            h1 {font-size:1.8rem;}
-            .timer span {font-size:1.5rem;}
+        .btn-back .arrow {margin-right:.4rem; font-size:1.2rem;}
+        @keyframes fadeIn{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:none;}}
+        @media (max-width:480px){
+            h1{font-size:1.8rem;}
+            .timer span{font-size:1.5rem;}
         }
     </style>
 </head>
@@ -95,19 +96,25 @@
     <div class="card">
         <h1>Segera Hadir!</h1>
         <p>Situs kami sedang dalam proses pengembangan. Tetap disini, kami akan kembali dalam beberapa hari.</p>
+
         <div class="timer">
             <div><span id="days">00</span><small>Hari</small></div>
             <div><span id="hours">00</span><small>Jam</small></div>
             <div><span id="minutes">00</span><small>Menit</small></div>
             <div><span id="seconds">00</span><small>Detik</small></div>
         </div>
-        <a href="https://wa.me/628123456789" class="btn">Hubungi Kami</a>
-        <a href="/ig" class="btn" style="margin-left:0.5rem;">Kembali</a>
+
+        <!-- Tombol Back (kiri, lebih kecil) -->
+        <a href="javascript:history.back()" class="btn-back">
+            <span class="arrow">←</span>Kembali
+        </a>
     </div>
+
     <script>
         // Simple countdown (set target date here)
         const target = new Date();
         target.setDate(target.getDate() + 10); // 10 hari ke depan
+
         function updateTimer(){
             const now = new Date();
             const diff = target - now;
